@@ -1,0 +1,41 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note right of browser: The browser submits a new note and clicks on the save button
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    server-->>browser: Status Code: 302 URL response
+    deactivate server
+    
+    Note left of server: The server responds with a HTTP status code 302 that request a new browser call
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server->>browser: Status Code: 200 OK HTML Document
+    deactivate server
+
+    Note left of server: The server responds with a HTTP status code 200 that fetches a HTML
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server->>browser: Status code 200 OK CSS Document
+    deactivate server
+
+    Note left of server: The server responds with a HTTP status code 200 that fetches a CSS document
+
+    browser->>server: GET  https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server->>browser: Status code 200 OK JS Document
+    deactivate server
+
+    Note left of server: The server responds with a HTTP status code 200 that fetches the JS file
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server->>browser: Status code 200 OK json Document
+    deactivate server
+
+    Note left of server: The server responds with a HTTP status code 200 that fetches the json document and renders the new note
+
